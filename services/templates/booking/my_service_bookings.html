@@ -1,0 +1,32 @@
+<!-- my_service_bookings.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Bookings for Your Services</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Service</th>
+            <th>Booked By</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.service.title }}</td>
+                <td>{{ booking.client.username }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.status }}</td>
+                <td><a href="{% url 'booking-update' booking.id %}" class="btn btn-sm btn-secondary">Update Status</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No bookings found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
